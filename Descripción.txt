@@ -1,0 +1,23 @@
+Este diagrama modela un sistema de e-commerce utilizando una clara jerarquía para los roles de usuario y entidades bien definidas para los procesos de compra y pedido.
+
+Herencia y Jerarquía 👑 El diseño establece una jerarquía clara con Usuario como la clase base, conteniendo datos comunes de autenticación. Las clases Cliente y Administrador heredan de Usuario, actuando como especializaciones con funciones distintas: el cliente compra y el administrador gestiona. Esta estructura promueve la reutilización de código.
+
+Relación entre Entidades 🔗 Las entidades se conectan lógicamente para representar el negocio:
+
+Un Cliente tiene una única instancia de CarritoCompras.
+
+El CarritoCompras se compone de uno o más ProductoCarrito, que es una línea de compra que refleja un Producto y una cantidad específica.
+
+Un Pedido se compone de uno o más detallePedido, que es el registro permanente de un producto comprado, su cantidad y el precio en ese momento.
+
+El Administrador gestiona tanto el catálogo de Producto como el ciclo de vida de los Pedido.
+
+Flujo del Cliente 🧑‍💻➡️🛒➡️🧾 El proceso de un cliente a través del sistema sería el siguiente:
+
+Registro: Un visitante se registra, creando una instancia de Cliente (que a su vez es un Usuario).
+
+Navegación y Carrito: El Cliente agrega un Producto a su CarritoCompras. Esto crea un ProductoCarrito que asocia ese producto con una cantidad. El cliente puede modificar o eliminar estos ítems.
+
+Confirmación de Compra: Al finalizar, el Cliente confirma la compra. El sistema utiliza la información del CarritoCompras para generar un Pedido.
+
+Creación del Pedido: El Pedido se crea como un registro histórico e inmutable, conteniendo uno o más detallePedido que "congelan" los datos de la compra (qué producto, cuánto y a qué precio se vendió).
